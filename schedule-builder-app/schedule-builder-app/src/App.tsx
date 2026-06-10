@@ -12,7 +12,7 @@ const App = () => {
   const [classTime, setClassTime] = useState('')
   
   // State: Store which day the user picked (Monday, Tuesday, etc)
-  const [classDay, setClassDay] = useState('')
+  const [classDay, setClassDay] = useState('Mondays') // Default to Mondays
 
   // Function: This runs when the "Add Class" button is clicked
   const addClassToSchedule = () => {
@@ -20,8 +20,10 @@ const App = () => {
     const newClass = {
       name: className,
       time: classTime,
-      day: classDay
+      day: classDay,
     }
+
+
     
     // Add the new class to the list (... means copy all old classes, then add this new one)
     setClasses([...classes, newClass])
@@ -50,18 +52,18 @@ const App = () => {
 
         {/* Input box for class time */}
         <input 
-          type="time"
+          type="datetime-local" 
           value={classTime}
           onChange={(e) => setClassTime(e.target.value)}
         />
 
         {/* Dropdown to pick the day */}
         <select value={classDay} onChange={(e) => setClassDay(e.target.value)}>
-          <option value="Monday">Monday</option>
-          <option value="Tuesday">Tuesday</option>
-          <option value="Wednesday">Wednesday</option>
-          <option value="Thursday">Thursday</option>
-          <option value="Friday">Friday</option>
+          <option value="Mondays">Mondays</option>
+          <option value="Tuesdays">Tuesdays</option>
+          <option value="Wednesdays">Wednesdays</option>
+          <option value="Thursdays">Thursdays</option>
+          <option value="Fridays">Fridays</option>
         </select>
 
         {/* Button that runs addClassToSchedule when clicked */}
@@ -69,11 +71,26 @@ const App = () => {
           Add Class
          
         </button>
-        <h2> Your Classes ({classes.length === 0 ? 'No classes added yet' : `${classes.length} class(es)`}) </h2>
+        <h2> Your Classes ({classes.length === 0 ? 
+        'No classes added yet' : `${classes.length} class(es)`}) </h2>
+
+
+        {/* List of all classes the user added */}
+        <p>
+          {classes.map((c, index) => (
+            <li key={index}>
+              {c.name} - {c.time} on {c.day}
+            </li>
+          ))}
+        </p>
 
       </header>
+
+
     </div>
   )
 }
 
 export default App
+
+
