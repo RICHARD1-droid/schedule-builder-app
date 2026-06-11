@@ -27,7 +27,7 @@ const App = () => {
   // We set a default value of 'Mondays' so the dropdown always has something selected
   const [classDay, setClassDay] = useState('')
 
-  // ===== EVENT HANDLERS =====
+  // ===== EVENT HANDLERS ===== 
   // Function: This runs when the "Add Class" button is clicked
   // It gathers the data from the form inputs and adds a new class to our list
   const addClassToSchedule = () => {
@@ -67,6 +67,7 @@ const App = () => {
   return (
     // Main container with the "App" CSS class for styling
     <div className="App">
+     
       {/* Header section that contains all the form controls and schedule display */}
       <header className="App-header">
         {/* Title of the application */}
@@ -97,17 +98,21 @@ const App = () => {
 </p>
         {/* Input box for class time */}
         {/*
-          - type="datetime-local" creates a date AND time picker (see calendar icon)
-          - This is easier than making the user type the date and time manually
-          - value={classTime} shows the selected date/time in the input
+          - type="time" creates a time picker
+          - min and max set the earliest and latest times available
+          - value={classTime} shows the selected time in the input
           - onChange updates our state when the user changes the selection
         */}
         <p>
         <input 
-          type="time" 
+          id="class-time"
+          type="time"
+          min="08:00"
+          max="20:00"
           value={classTime}
           onChange={(e) => setClassTime(e.target.value)}
         />
+        
 </p>
         {/* Dropdown menu to pick the day of week */}
         {/*
